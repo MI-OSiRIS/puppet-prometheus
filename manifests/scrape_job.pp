@@ -24,12 +24,12 @@ define prometheus::scrape_job (
   Hash[String[1], String[1]] $labels = {},
   Stdlib::Absolutepath $collect_dir  = undef,
 ) {
-  $config = to_yaml([
-    {
-      targets => $targets,
-      labels  => $labels,
-    },
-  ])
+  $config = [
+      {
+        targets => $targets,
+        labels  => $labels,
+      },
+  ]
   file { "${collect_dir}/${job_name}_${name}.yaml":
     ensure  => present,
     owner   => $prometheus::user,
